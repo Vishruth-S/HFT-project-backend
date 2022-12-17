@@ -1,5 +1,5 @@
-const express = require('express')
 var cors = require('cors')
+const express = require('express')
 require('dotenv').config()
 const mongoose = require('mongoose')
 const session = require('express-session')
@@ -8,36 +8,36 @@ const auth = require('./middlewares/auth')
 const morgan = require("morgan");
 
 const app = express()
+// app.use(cors({
+//     origin: '*'
+// }));
 
-// const whitelist = [
-//     'http://127.0.0.1:3000',
-//     'http://localhost:3000',
-//     'http://localhost:3000/',
-//     'http://192.168.56.1'
-// ]
-// const corsOptions = {
-//     origin(origin, callback) {
-//         if (!origin) {
-//             // for mobile app and postman client
-//             return callback(null, true)
-//         }
-//         if (whitelist.indexOf(origin) !== -1) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error('Not allowed by CORS'))
-//         }
-//     },
-//     credentials: true, //access-control-allow-credentials:true
-//     optionSuccessStatus: 200,
-//     methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
-//     allowedHeaders: '*',
-//     'Access-Control-Request-Headers': '*',
-// }
+const whitelist = [
+    'http://127.0.0.1:3000',
+    'http://localhost:3000',
+    'http://localhost:3000/',
+    'http://192.168.56.1'
+]
+const corsOptions = {
+    origin(origin, callback) {
+        if (!origin) {
+            // for mobile app and postman client
+            return callback(null, true)
+        }
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    },
+    credentials: true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
+    methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH'],
+    allowedHeaders: '*',
+    'Access-Control-Request-Headers': '*',
+}
 
-// app.use(cors(corsOptions))
-app.use(cors({
-    origin: '*'
-}))
+app.use(cors(corsOptions))
 
 mongoose
     .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
