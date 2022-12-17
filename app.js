@@ -58,11 +58,9 @@ app.use('/api/auth', require('./routes/authRoutes'))
 app.use('/api/post', require('./routes/postRoutes'))
 
 ////// TEST/////////
-// app.get('/', auth, (req, res) => {
-//     res.send('Hello World!');
-//     // console.log(req.session.user);
-
-// })
+app.get('/', (req, res) => {
+    res.send('Hello World!');
+})
 
 app.listen(process.env.PORT || 5000, () => {
     console.log(`Server listening for request at ${process.env.PORT}`)  
