@@ -10,18 +10,15 @@ const { createPost } = require('../controllers/post/createPost')
 const { acceptReq } = require('../controllers/post/acceptReq')
 const { getPost } = require("../controllers/post/getPost")
 
-const { uploadImage } = require('../controllers/post/uploadImage')
-const { getImage } = require('../controllers/post/getImage')
+
 
 
 // BASE URL - /api/post
 
 router.get('/', getPost)
-router.post('/', protectUser, createPost)
+router.post('/', protectUser, upload.single('file') ,createPost)
 router.put('/acceptReq/:id', protectUser, acceptReq);
 
-router.put('/image/:id', upload.single('file'), protectUser, uploadImage)
-router.get('/image', protectUser, getImage)
 
 
 module.exports = router;
