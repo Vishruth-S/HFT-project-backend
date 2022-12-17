@@ -15,7 +15,11 @@ const UserSchema = new Schema({
         type: String,
         required: true,
     },
-    type: String
+    type: String,
+    credit: {
+        type: Number,
+        default: 0
+    }
 
 })
 

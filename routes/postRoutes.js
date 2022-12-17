@@ -9,15 +9,14 @@ const { protectUser } = require('../middlewares/auth')
 const { createPost } = require('../controllers/post/createPost')
 const { acceptReq } = require('../controllers/post/acceptReq')
 const { getPost } = require("../controllers/post/getPost")
-
-
-
+const { getLeaderboard } = require('../controllers/post/leaderboard')
 
 // BASE URL - /api/post
 
 router.get('/', getPost)
 router.post('/', protectUser, upload.single('file') ,createPost)
 router.put('/acceptReq/:id', protectUser, acceptReq);
+router.get('/leaderboard',protectUser,getLeaderboard)
 
 
 

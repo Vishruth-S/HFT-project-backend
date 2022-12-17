@@ -1,4 +1,5 @@
 const Post = require('../../models/Post')
+const User = require('../../models/User')
 const { uploadFile } = require('../../utils/s3');
 const { getObjectSignedUrl } = require('../../utils/s3');
 
@@ -23,14 +24,20 @@ const createPost = async (req, res) => {
     await uploadFile(fileBuffer, imageName, file.mimetype)
 
     const url = await getObjectSignedUrl(imageName);
-    console.log(url)
-    // const orginalLink = process.env.BASEURL + "images/" + file.originalname;
+    const orginalLink = process.env.BASEURL + "images/" + file.originalname;
 
     try {
+
         const user = await Post.create({
             userId: req.session.user._id, title, desc, numberOfServing, expiry, isNonVeg, username, coordinates, address,
             city, state, contactInfo, imageUrl: url
         })
+
+        const credit = req.session.user.credit;
+        const updateCredit = credit + 10;
+        console.log(updateCredit)
+        // update credit in user
+        await User.findByIdAndUpdate(req.session.user._id, { credit: updateCredit })
 
         res.status(201).json({
             message: "Post Created Successfully",

@@ -19,7 +19,6 @@ const PostSchema = new Schema({
     },
     address: String,
     city: String,
-    state: String,
     contactInfo: String,
     imageUrl: {
         type: String,
@@ -28,7 +27,8 @@ const PostSchema = new Schema({
     isAcceptedBy: {
         type: Schema.Types.ObjectId,
         ref: User,
-    }
+    },
+    
 })
 
 const Post = mongoose.model('post', PostSchema)
