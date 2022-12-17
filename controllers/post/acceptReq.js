@@ -15,13 +15,13 @@ const acceptReq = async (req, res) => {
         if (post.isAcceptedBy == null) {
             post.isAcceptedBy = req.session.user._id;
             //sending a post request to the user who has sent the request to api https://w2e9j471i2.execute-api.ap-south-1.amazonaws.com/dev/send-email
-            // const data = {
-            //     toEmail: post.userId.email,
-            //     subject: "Food Donation Request Accepted",
-            //     content: `The Food Request has been accepted by ${req.user.name}.`
-            // }
-            // const response = await axios.post(process.env.EMAIL, data);
-            // console.log(response.data);
+            const data = {
+                toEmail: post.userId.email,
+                subject: "Food Donation Request Accepted",
+                content: `The Food Request has been accepted by ${req.session.user.username}.`
+            }
+            const response = await axios.post(process.env.EMAIL, data);
+            console.log(response.data);
             await post.save();
         } else if (post.isAcceptedBy != null) {
             post.isAcceptedBy = null;

@@ -13,6 +13,7 @@ const whitelist = [
     'http://127.0.0.1:3000',
     'http://localhost:3000',
     'http://localhost:3000/',
+    'https://HFT-project-backend-1.naaz007.repl.co'
 ]
 const corsOptions = {
     origin(origin, callback) {
