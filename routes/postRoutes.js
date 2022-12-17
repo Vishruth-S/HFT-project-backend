@@ -14,9 +14,9 @@ const { getLeaderboard } = require('../controllers/post/leaderboard')
 // BASE URL - /api/post
 
 router.get('/', getPost)
-router.post('/', protectUser, upload.single('file') ,createPost)
+router.post('/', upload.single('file'), createPost)
 router.put('/acceptReq/:id', protectUser, acceptReq);
-router.get('/leaderboard',protectUser,getLeaderboard)
+router.get('/leaderboard', protectUser, getLeaderboard)
 
 
 
