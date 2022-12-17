@@ -11,7 +11,7 @@ const PostSchema = new Schema({
     title: { type: String, required: true },
     desc: String,
     numberOfServing: { type: Number, required: true },
-    expiry: { type: Date, required: true },
+    expiry: { type: String, required: true },
     isNonVeg: { type: Boolean, required: true },
     coordinates: {
         lat: Number,
@@ -28,7 +28,7 @@ const PostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: User,
     },
-    
+
 })
 
 const Post = mongoose.model('post', PostSchema)

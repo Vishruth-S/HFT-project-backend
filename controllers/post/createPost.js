@@ -29,15 +29,15 @@ const createPost = async (req, res) => {
     try {
 
         const user = await Post.create({
-            userId: req.session.user._id, title, desc, numberOfServing, expiry, isNonVeg, username, coordinates, address,
+         title, desc, numberOfServing, expiry, isNonVeg, username, coordinates, address,
             city, state, contactInfo, imageUrl: url
         })
 
-        const credit = req.session.user.credit;
-        const updateCredit = credit + 10;
-        console.log(updateCredit)
-        // update credit in user
-        await User.findByIdAndUpdate(req.session.user._id, { credit: updateCredit })
+        // const credit = req.session.user.credit;
+        // const updateCredit = credit + 10;
+        // console.log(updateCredit)
+        // // update credit in user
+        // await User.findByIdAndUpdate(req.session.user._id, { credit: updateCredit })
 
         res.status(201).json({
             message: "Post Created Successfully",
