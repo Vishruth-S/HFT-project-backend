@@ -3,7 +3,6 @@ const User = require('../../models/User')
 
 const userLogin = async (req, res) => {
     try {
-        console.log(';hi')
         const { email, password } = req.body
         const user = await User.findOne({ email })
         if (!user) {
@@ -15,7 +14,7 @@ const userLogin = async (req, res) => {
         }
         req.session.isAuth = true;
         req.session.user = user;
-        console.log(req.session.user)
+        console.log("hi",req.session.user)
 
         res.status(200).json({
             message: 'User logged in successfully',
@@ -28,7 +27,7 @@ const userLogin = async (req, res) => {
 }
 
 const userSignup = async (req, res) => {
-    const { email, password, username } = req.body
+    const { email, password, username, type} = req.body
     if (!email) {
         return res.status(400).json({ error: 'Invalid email' })
     }
@@ -51,7 +50,7 @@ const userSignup = async (req, res) => {
                 error: 'User already exists',
             })
         }
-        user = new User({ email, password: encryptPassword, username })
+        user = new User({ email, password: encryptPassword, username,type })
         await user.save();
 
         req.session.user = user;

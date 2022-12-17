@@ -49,17 +49,20 @@ app.use(morgan("tiny"));
 app.use('/images', express.static('images'))
 app.use(session({
     secret: process.env.SECRET,
-    resave: false, // Dont create a new cookie for every request
+    resave: false,                // Not creating  a new cookie for every request
     saveUninitialized: false,
     store: store,
 }))
 
 app.use('/api/auth', require('./routes/authRoutes'))
+app.use('/api/post', require('./routes/postRoutes'))
 
 ////// TEST/////////
-app.get('/', auth, (req, res) => {
-    res.send('Hello World!')
-})
+// app.get('/', auth, (req, res) => {
+//     res.send('Hello World!');
+//     // console.log(req.session.user);
+
+// })
 
 app.listen(process.env.PORT || 5000, () => {
     console.log(`Server listening for request at ${process.env.PORT}`)  

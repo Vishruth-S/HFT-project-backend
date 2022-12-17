@@ -1,9 +1,8 @@
-
 const protectUser = async (req, res, next) => {
     try {
         if (req.session.isAuth) {
             next()
-        }else{
+        } else {
             res.status(401).json({ message: 'Unauthorized' })
         }
     }
@@ -19,4 +18,4 @@ const protectUser = async (req, res, next) => {
 }
 
 
-module.exports = protectUser 
+module.exports = { protectUser } 
